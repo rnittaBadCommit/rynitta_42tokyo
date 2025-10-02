@@ -40,13 +40,13 @@ t_save_list_node	*find_or_create_save_list_node(t_save_list *save_list, int fd_t
 			return (node_);
 		node_ = node_->next;
 	}
-	
 	node_ = (t_save_list_node *)malloc(sizeof(t_save_list_node));
 	if (!node_)
-	return (NULL);
+		return (NULL);
 	node_->fd = fd_to_find;
 	node_->next = NULL;
 	node_->save_data = ft_strndup("", 0);
+	node_->len_data = 0;
 	if (!node_->save_data)
 	{
 		free(node_);
@@ -62,19 +62,17 @@ t_save_list_node	*find_or_create_save_list_node(t_save_list *save_list, int fd_t
 	return (node_);
 }
 
-int	calculate_index_c(char *s, char to_find)
+int	calculate_index_c(char *s, int len_s, char to_find)
 {
 	int	ret;
 
 	ret = 0;
-	while (s[ret])
+	while (ret < len_s)
 	{
 		if (s[ret] == to_find)
 			return (ret);
 		++ret;
 	}
-	if (to_find == '\0')
-		return (ret);
 	return (NOT_FOUND);
 }
 
@@ -96,29 +94,30 @@ char	*ft_strndup(char *s, int len)
 	return (ret);
 }
 
-char	*ft_strcatdup(char *original, char *to_append)
+char	*ft_strcatdup(char *original, int len_original, char *to_append, int len_append)
 {
-	int	len_ret_str;
-	int	i;
+	int		i;
+	int		i_ret;
 	char	*ret;
 
-	ret = (char *)malloc(calculate_index_c(original, '\0') \
-		+ calculate_index_c(to_append, '\0') + 1);
+	ret = (char *)malloc(len_original + len_append + 1);
 	if (!ret)
 		return (NULL);
+	i_ret = 0;
 	i = 0;
-	while (*original)
+	while (i < len_original)
 	{
-		ret[i] = *original;
-		++original;
+		ret[i_ret] = original[i];
+		++i_ret;
 		++i;
 	}
-	while (*to_append)
+	i = 0;
+	while (i < len_append)
 	{
-		ret[i] = *to_append;
-		++to_append;
+		ret[i_ret] = to_append[i];
+		++i_ret;
 		++i;
 	}
-	ret[i] = '\0';
+	ret[i_ret] = '\0';
 	return (ret);
 }

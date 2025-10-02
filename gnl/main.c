@@ -8,21 +8,32 @@ int main(int argc, char **argv)
 	char	*ret;
 	int		i;
 
-	++argv;
 	if (argc == 1)
-		fd = 0;
-	else
 	{
-		printf("%s\n\n", argv[0]);
-		fd = open(argv[0], O_RDONLY);
+		while (1)
+		{
+			ret = get_next_line(0);
+			if (!ret)
+				return (0);
+			printf("%s\n", ret);
+		}
 	}
-	if (fd < 0)
-		printf("open fail\n");
-	while (1)
+	while (*(++argv))
 	{
-		ret = get_next_line(fd);
-		if (!ret)
-			break;
-		printf("%s\n", ret);
+		// printf("\n\n%s\n\n", argv[0]);
+		fd = open(argv[0], O_RDONLY);
+		if (fd < 0)
+			printf("open fail\n");
+		i = 0;
+		while (1)
+		{
+			if (i == 20)
+				i = i;
+			ret = get_next_line(fd);
+			if (!ret)
+				break;
+			write(1, "\n", 1);
+			++i;
+		}
 	}
 }
