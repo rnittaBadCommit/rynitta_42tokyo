@@ -6,8 +6,6 @@ void	delete_save_list_node(t_save_list *save_list, int fd_to_delete)
 	t_save_list_node	*tmp;
 
 	node_ = save_list->head;
-	// if (!node_)
-	// 	return;
 	if (node_->fd == fd_to_delete)
 	{
 		save_list->head = save_list->head->next;
@@ -19,6 +17,8 @@ void	delete_save_list_node(t_save_list *save_list, int fd_to_delete)
 	{
 		if (node_->next->fd == fd_to_delete)
 		{
+			if (save_list->tail->fd == fd_to_delete)
+				save_list->tail = node_;
 			tmp = node_->next->next;
 			free(node_->next->save_data);
 			free(node_->next);
@@ -58,7 +58,10 @@ t_save_list_node	*find_or_create_save_list_node(t_save_list *save_list, int fd_t
 		save_list->tail = node_;
 	}
 	else
+	{
 		save_list->tail->next = node_;
+		save_list->tail = node_;
+	}
 	return (node_);
 }
 

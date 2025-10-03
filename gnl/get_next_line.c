@@ -7,18 +7,23 @@ void	update_node(t_save_list *save_list, t_save_list_node *node)
 
 	i_linebreak = calculate_index_c(node->save_data, node->len_data, '\n');
 	if (i_linebreak == NOT_FOUND)
+	{
 		delete_save_list_node(save_list, node->fd);
+		return ;
+	}
 	tmp = node->save_data;
 	node->save_data = ft_strndup(node->save_data + i_linebreak + 1, node->len_data - i_linebreak - 1);
 	if (!node->save_data)
+	{
 		delete_save_list_node(save_list, node->fd);
+		return ;
+	}
 	node->len_data -= i_linebreak + 1;
 	free(tmp);
 }
 
-t_status	read_process(t_save_list_node *node)
+t_status	read_process(t_save_list_node *node, char *buf)
 {
-	char				buf[(unsigned long long int)BUFFER_SIZE + 1];
 	int					ret;
 	char				*tmp;
 
@@ -33,6 +38,8 @@ t_status	read_process(t_save_list_node *node)
 		tmp = node->save_data;
 		node->save_data = ft_strcatdup(node->save_data, node->len_data, buf, ret);
 		free(tmp);
+		if (!node->save_data)
+			return (ERROR);
 		node->len_data += ret;
 		if (calculate_index_c(buf, ret, '\n') != NOT_FOUND)
 			return (SUCCESS);
@@ -45,7 +52,13 @@ char	*case_need_to_read(t_save_list_node *node)
 	t_status	status;
 	char		*ret;
 	int			i_linebreak;
-	status = read_process(node);
+	char		*buf;
+
+	buf = (char *)malloc((unsigned long long int)BUFFER_SIZE + 1);
+	if (!buf)
+		return (NULL);
+	status = read_process(node, buf);
+	free(buf);
 	if (status == ERROR)
 		ret = NULL;
 	else if (node->len_data == 0)
