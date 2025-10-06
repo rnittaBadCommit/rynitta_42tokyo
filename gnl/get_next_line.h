@@ -20,20 +20,14 @@ typedef struct s_save_list_node
 	struct s_save_list_node	*next;
 }	t_save_list_node;
 
-typedef struct s_save_list
-{
-	t_save_list_node	*head;
-	t_save_list_node	*tail;
-}	t_save_list;
-
 # ifndef BUFFER_SIZE
 #  define BUFFER_SIZE 3
 # endif
 
 # define NOT_FOUND -1
 
-void	delete_save_list_node(t_save_list *save_list, int fd_to_delete);
-t_save_list_node	*find_or_create_save_list_node(t_save_list *save_list, int fd_to_find);
+void	delete_save_list_node(t_save_list_node *save_list, int fd_to_delete);
+t_save_list_node	*find_or_create_save_list_node(t_save_list_node *save_list, int fd_to_find);
 int	calculate_index_c(char *s, int len_s, char to_find);
 char	*ft_strndup(char *s, int len);
 char	*ft_strcatdup(char *original, int len_original, char *to_append, int len_append);

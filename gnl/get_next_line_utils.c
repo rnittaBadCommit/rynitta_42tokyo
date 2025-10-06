@@ -1,24 +1,15 @@
 #include "get_next_line.h"
 
-void	delete_save_list_node(t_save_list *save_list, int fd_to_delete)
+void	delete_save_list_node(t_save_list_node *save_list, int fd_to_delete)
 {
 	t_save_list_node	*node_;
 	t_save_list_node	*tmp;
 
-	node_ = save_list->head;
-	if (node_->fd == fd_to_delete)
-	{
-		save_list->head = save_list->head->next;
-		free(node_->save_data);
-		free(node_);
-		return ;
-	}
+	node_ = save_list;
 	while (node_->next)
 	{
 		if (node_->next->fd == fd_to_delete)
 		{
-			if (save_list->tail->fd == fd_to_delete)
-				save_list->tail = node_;
 			tmp = node_->next->next;
 			free(node_->next->save_data);
 			free(node_->next);
@@ -29,40 +20,32 @@ void	delete_save_list_node(t_save_list *save_list, int fd_to_delete)
 	}
 }
 
-t_save_list_node	*find_or_create_save_list_node(t_save_list *save_list, int fd_to_find)
+t_save_list_node	*find_or_create_save_list_node(t_save_list_node *save_list, int fd_to_find)
 {
 	t_save_list_node	*node_;
+	t_save_list_node	*new_node_;
 
-	node_ = save_list->head;
-	while (node_)
+	node_ = save_list;
+	while (node_->next)
 	{
-		if (node_->fd == fd_to_find)
-			return (node_);
+		if (node_->next->fd == fd_to_find)
+			return (node_->next);
 		node_ = node_->next;
 	}
-	node_ = (t_save_list_node *)malloc(sizeof(t_save_list_node));
-	if (!node_)
+	new_node_ = (t_save_list_node *)malloc(sizeof(t_save_list_node));
+	if (!new_node_)
 		return (NULL);
-	node_->fd = fd_to_find;
-	node_->next = NULL;
-	node_->save_data = ft_strndup("", 0);
-	node_->len_data = 0;
-	if (!node_->save_data)
+	new_node_->fd = fd_to_find;
+	new_node_->next = NULL;
+	new_node_->save_data = ft_strndup("", 0);
+	new_node_->len_data = 0;
+	if (!new_node_->save_data)
 	{
-		free(node_);
+		free(new_node_);
 		return (NULL);
 	}
-	if (!save_list->head)
-	{
-		save_list->head = node_;
-		save_list->tail = node_;
-	}
-	else
-	{
-		save_list->tail->next = node_;
-		save_list->tail = node_;
-	}
-	return (node_);
+	node_->next = new_node_;
+	return (new_node_);
 }
 
 int	calculate_index_c(char *s, int len_s, char to_find)

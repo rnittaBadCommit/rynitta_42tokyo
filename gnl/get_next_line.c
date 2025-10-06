@@ -1,6 +1,6 @@
 #include "get_next_line.h"
 
-void	update_node(t_save_list *save_list, t_save_list_node *node)
+void	update_node(t_save_list_node *save_list, t_save_list_node *node)
 {
 	char	*tmp;
 	int		i_linebreak;
@@ -16,6 +16,7 @@ void	update_node(t_save_list *save_list, t_save_list_node *node)
 	if (!node->save_data)
 	{
 		delete_save_list_node(save_list, node->fd);
+		free(tmp);
 		return ;
 	}
 	node->len_data -= i_linebreak + 1;
@@ -82,10 +83,10 @@ char	*case_need_to_read(t_save_list_node *node)
 
 char	*get_next_line(int fd)
 {
-	char				*ret;
-	static t_save_list	save_list;
-	t_save_list_node	*node;
-	int					len;
+	char					*ret;
+	static t_save_list_node	save_list;
+	t_save_list_node		*node;
+	int						len;
 
 	node = find_or_create_save_list_node(&save_list, fd);
 	if (!node)
@@ -104,5 +105,3 @@ char	*get_next_line(int fd)
 		update_node(&save_list, node);
 	return (ret);
 }
-
-
