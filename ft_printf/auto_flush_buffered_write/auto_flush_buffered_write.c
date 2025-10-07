@@ -53,41 +53,41 @@ int	flush_buffer(void)
 	return (_auto_flush_buffered_write(NULL, EXPLICIT_FLUSH));
 }
 
-#include <stdio.h>
-int main(int argc, char **argv)
-{
-	int	i;
+// #include <stdio.h>
+// int main(int argc, char **argv)
+// {
+// 	int	i;
 	
-	if (argc > 1)
-	{
-		i = 1;
-		while (argv[i])
-		{
-			printf("i: %d\n", i);
-			auto_flush_buffered_write(argv[i]);
-			printf("\n");
-			++i;
-		}
-		printf("explicit flush\n");
-		flush_buffer();
-		printf("\n");
-		return (0);
-	}
-	else
-	{
-		auto_flush_buffered_write("1");
-		printf("\n");
-		auto_flush_buffered_write("2");
-		printf("\n");
-		auto_flush_buffered_write("3");
-		printf("\n");
-		auto_flush_buffered_write("4");
-		printf("\n");
-		auto_flush_buffered_write("5");
-		printf("\n");
-		auto_flush_buffered_write("67");
-		printf("\n");
-		auto_flush_buffered_write("abcd");
-		printf("\n");
-	}
-}
+// 	if (argc > 1)
+// 	{
+// 		i = 1;
+// 		while (argv[i])
+// 		{
+// 			printf("i: %d\n", i);
+// 			auto_flush_buffered_write(argv[i]);
+// 			printf("\n");
+// 			++i;
+// 		}
+// 		printf("explicit flush\n");
+// 		flush_buffer();
+// 		printf("\n");
+// 		return (0);
+// 	}
+// 	else
+// 	{
+// 		auto_flush_buffered_write("1");
+// 		printf("\n");
+// 		auto_flush_buffered_write("2");
+// 		printf("\n");
+// 		auto_flush_buffered_write("3");
+// 		printf("\n");
+// 		auto_flush_buffered_write("4");
+// 		printf("\n");
+// 		auto_flush_buffered_write("5");
+// 		printf("\n");
+// 		auto_flush_buffered_write("67");
+// 		printf("\n");
+// 		auto_flush_buffered_write("abcd");
+// 		printf("\n");
+// 	}
+// }
