@@ -27,7 +27,7 @@ typedef struct s_conversion_setting
 # include "auto_flush_buffered_write/auto_flush_buffered_write.h"
 # include "case_conversion/case_conversion.h"
 
-# define CONVERSION_CHARACTERS "cspdiuxX"
+# define CONVERSION_CHARACTERS "cspdiuxX%%"
 # define FLAG_CHARACTERS "-0# +"
 
 # define FLAG_MINUS	(1 << 0)
@@ -40,7 +40,7 @@ typedef struct s_conversion_setting
 int	ft_printf(const char *format, ...);
 
 int	auto_flush_buffered_write(char *s);
-int	load_conversion(const char *s, t_conversion_setting *conversion_setting);
+int	load_conversion_setting(const char *s, va_list *ap, t_conversion_setting *conversion_setting);
 bool	is_conversion(const char *s);
 
 
