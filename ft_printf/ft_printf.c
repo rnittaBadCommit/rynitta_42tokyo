@@ -1,41 +1,46 @@
 #include "ft_printf.h"
 
+int	switch_conversion(va_list *ap, t_conversion_setting conversion_setting)
+{
+
+	if (conversion_setting.conversion_type == 'c')
+		return (case_c(va_arg(*ap, int), &conversion_setting));
+	else if (conversion_setting.conversion_type == 's')
+		return (case_s(va_arg(*ap, char *), &conversion_setting));
+	else if (conversion_setting.conversion_type == 'd')
+		return (case_di(va_arg(*ap, int), &conversion_setting));
+	else if (conversion_setting.conversion_type == 'p')
+		return (case_p(va_arg(*ap, void *), &conversion_setting));
+	else if (conversion_setting.conversion_type == 'u')
+		return (case_u(va_arg(*ap, unsigned int), &conversion_setting));
+	else if (conversion_setting.conversion_type == 'x')
+		return (case_xX(va_arg(*ap, unsigned int), &conversion_setting));
+	else if (conversion_setting.conversion_type == 'X')
+		return (case_xX(va_arg(*ap, unsigned int), &conversion_setting));
+	else
+		;
+	return (-1);
+}
+
 int	ft_printf(const char *str, ...)
 {
-	int	ret;
-	va_list	ap;
-	int	i_str;
+	int						ret;
+	va_list					ap;
 	t_conversion_setting	conversion_setting;
 
 	va_start(ap, str);
 	ret = 0;
-	i_str = 0;
-	while (str[i_str])
+	while (*str)
 	{
-		if (is_conversion(str + i_str))
+		if (is_conversion(str))
 		{
-			i_str += load_conversion(str + i_str, &conversion_setting);
-			if (conversion_setting.conversion_type == 'c')
-				ret += case_c(va_arg(ap, int), &conversion_setting);
-			else if (conversion_setting.conversion_type == 's')
-				ret += case_s(va_arg(ap, char *), &conversion_setting);
-			else if (conversion_setting.conversion_type == 'd')
-				ret += case_di(va_arg(ap, int), &conversion_setting);
-			else if (conversion_setting.conversion_type == 'p')
-				ret += case_p(va_arg(ap, void *), &conversion_setting);
-			else if (conversion_setting.conversion_type == 'u')
-				ret += case_u(va_arg(ap, unsigned int), &conversion_setting);
-			else if (conversion_setting.conversion_type == 'x')
-				ret += case_xX(va_arg(ap, unsigned int), &conversion_setting);
-			else if (conversion_setting.conversion_type == 'X')
-				ret += case_xX(va_arg(ap, unsigned int), &conversion_setting);
-			else
-				;
+			str += load_conversion_setting(str, &ap, &conversion_setting);
+			ret += switch_conversion(&ap, conversion_setting);
 		}
 		else
 		{
-			print_n_c(str[i_str], 1);
-			++i_str;
+			ret += print_n_c(*str, 1);
+			++str;
 		}
 	}
 	ret += flush_buffer();
@@ -96,4 +101,15 @@ int main()
   ft_printf("\n");
   ft_printf("22[%-10d]\n", -42);
   ft_printf("23[%- 10d]\n", -42);
+
+
+  printf("\n");
+  printf("24[% *d]\n", 10, -42);
+  printf("25[%0*d]\n", 10, -42);
+  printf("26[%- *d]\n", 10, -42);
+
+  printf("\n");
+  printf("27[% *d]\n", -10, -42);
+  printf("28[%0*d]\n", -10, -42);
+  printf("29[%- *d]\n", -10, -42);
 }

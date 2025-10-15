@@ -40,7 +40,7 @@ typedef struct s_conversion_setting
 int	ft_printf(const char *format, ...);
 
 int	auto_flush_buffered_write(char *s);
-int	load_conversion(const char *s, t_conversion_setting *conversion_setting);
+int	load_conversion_setting(const char *s, va_list *ap, t_conversion_setting *conversion_setting);
 bool	is_conversion(const char *s);
 
 

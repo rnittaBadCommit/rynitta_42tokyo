@@ -15,10 +15,17 @@ static const char	*_load_flags(const char *s, t_flag *flag)
 	return (NULL);
 }
 
-static const char	*_load_width(const char *s, int *width)
+static const char	*_load_width(const char *s, int *width, va_list *ap)
 {
 	int	width_;
 
+	if (*s == '*')
+	{
+		*width = va_arg(*ap, int);
+		if (*width < 0)
+			*width *= -1;
+		return (s + 1);
+	}
 	width_ = 0;
 	while ('0' <= *s && *s <= '9')
 	{
@@ -37,7 +44,7 @@ static void	_finalize_flag(t_flag *flag)
 		ft_unset_flag(flag, FLAG_SPACE);
 }
 
-int	load_conversion(const char *s, t_conversion_setting *conversion_setting)
+int	load_conversion_setting(const char *s, va_list *ap, t_conversion_setting *conversion_setting)
 {
 	const char	*save_s;
 
@@ -46,7 +53,7 @@ int	load_conversion(const char *s, t_conversion_setting *conversion_setting)
 	ft_memzero(conversion_setting, sizeof(t_conversion_setting));
 	s = _load_flags(s, &conversion_setting->flag);
 	_finalize_flag(&conversion_setting->flag);
-	s = _load_width(s, &conversion_setting->width);
+	s = _load_width(s, &conversion_setting->width, ap);
 	conversion_setting->conversion_type = *s;
 	return (s + 1 - save_s);
 }
