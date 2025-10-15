@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_itoa.c                                          :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: rynitta <rynitta@student.42tokyo.jp>       +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/10/16 02:53:39 by rynitta           #+#    #+#             */
+/*   Updated: 2025/10/16 02:56:30 by rynitta          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "libft.h"
 
 static size_t	_count_digit(long long int n)
@@ -30,9 +42,9 @@ void	_fill_numbers(char *dest, long long int lln, size_t len_dest)
 
 char	*ft_itoa(int n)
 {
-	char	*ret;
+	char			*ret;
 	long long int	lln;
-	size_t	len_ret;
+	size_t			len_ret;
 
 	lln = n;
 	if (n < 0)

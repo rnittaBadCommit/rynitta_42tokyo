@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_split.c                                         :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: rynitta <rynitta@student.42tokyo.jp>       +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/10/16 02:54:20 by rynitta           #+#    #+#             */
+/*   Updated: 2025/10/16 02:59:15 by rynitta          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "libft.h"
 
 static char	*__free_all_substr(char **str_ary, size_t size)
@@ -35,7 +47,8 @@ static char	*__create_substr(const char *s, char *next_sep_pos)
 		return (ft_substr(s, 0, next_sep_pos - s));
 }
 
-static t_status	_fill_str_ary(char **str_ary, const char *s, char sep, size_t num_substr)
+static t_status	_fill_str_ary(char **str_ary, const char *s, \
+	char sep, size_t num_substr)
 {
 	size_t	i;
 	char	*next_sep_pos;

@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_putnbr_fd.c                                     :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: rynitta <rynitta@student.42tokyo.jp>       +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/10/16 02:54:17 by rynitta           #+#    #+#             */
+/*   Updated: 2025/10/16 02:59:15 by rynitta          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "libft.h"
 
 static void	_ft_putnbr_fd(long long int lln, int fd)
@@ -9,7 +21,7 @@ static void	_ft_putnbr_fd(long long int lln, int fd)
 
 void	ft_putnbr_fd(int n, int fd)
 {
-	long long int lln;
+	long long int	lln;
 
 	lln = n;
 	if (n < 0)

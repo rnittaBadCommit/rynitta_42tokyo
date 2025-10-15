@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   libft.h                                            :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: rynitta <rynitta@student.42tokyo.jp>       +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/10/16 02:58:57 by rynitta           #+#    #+#             */
+/*   Updated: 2025/10/16 03:03:40 by rynitta          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #ifndef LIBFT_H
 # define LIBFT_H
 
@@ -9,24 +21,21 @@ typedef enum e_status
 {
 	ERROR = -1,
 	SUCCESS = 0,
-
 }	t_status;
 
 typedef int	t_flag;
 
-
-typedef struct		s_list
+typedef struct s_list
 {
 	void			*content;
 	struct s_list	*next;
 }					t_list;
 
-
 void				*ft_memset(void *buf, int ch, size_t n);
 void				ft_bzero(void *s, size_t n);
 void				*ft_memcpy(void *buf1, const void *buf2, size_t n);
-void				*ft_memccpy(void *dest, const void *src,
-											int c, size_t n);
+void				*ft_memccpy(void *dest, const void *src, \
+	int c, size_t n);
 void				*ft_memmove(void *buf1, const void *buf2, size_t n);
 void				*ft_memchr(const void *buf, int ch, size_t n);
 int					ft_memcmp(const void *buf1, const void *buf2, size_t n);
@@ -35,8 +44,8 @@ size_t				ft_strlcpy(char *dest, const char *src, size_t size);
 size_t				ft_strlcat(char *dest, const char *src, size_t size);
 char				*ft_strchr(const char *s, int c);
 char				*ft_strrchr(const char *s, int c);
-char				*ft_strnstr(const char *s1, const char *s2,
-								size_t len);
+char				*ft_strnstr(const char *s1, const char *s2, \
+	size_t len);
 int					ft_strncmp(const char *s1, const char *s2, size_t n);
 int					ft_atoi(const char *str);
 int					ft_isalpha(int c);
@@ -67,18 +76,7 @@ void				ft_lstadd_back(t_list **lst, t_list *new);
 void				ft_lstdelone(t_list *lst, void (*del)(void *));
 void				ft_lstclear(t_list **lst, void (*del)(void *));
 void				ft_lstiter(t_list *lst, void (*f)(void *));
-t_list				*ft_lstmap(t_list *lst, void *(*f)(void *),
-												void (*del)(void *));
-
-
-int		ft_findc(char *s, char c);
-bool	ft_is_flag_set(int to_check, int flag);
-void	ft_unset_flag(t_flag *flag, t_flag flag_to_unset);
-int		ft_count_digits(int n);
-int		ft_count_hex_digits(int n);
-int		ft_put_number(int n);
-int		ft_putnbr_base(int n, char *base);
-
-long long int	ft_abs(long long int n);
+t_list				*ft_lstmap(t_list *lst, void *(*f)(void *), \
+void (*del)(void *));
 
 #endif
