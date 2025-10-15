@@ -6,7 +6,7 @@
 /*   By: rynitta <rynitta@student.42tokyo.jp>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/16 02:58:57 by rynitta           #+#    #+#             */
-/*   Updated: 2025/10/16 03:03:40 by rynitta          ###   ########.fr       */
+/*   Updated: 2025/10/16 05:20:10 by rynitta          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@ char				*ft_strchr(const char *s, int c);
 char				*ft_strrchr(const char *s, int c);
 char				*ft_strnstr(const char *s1, const char *s2, \
 	size_t len);
-void				ft_striteri(char const *s, char (*f)(unsigned int, char*));
+void				ft_striteri(char *s, void (*f)(unsigned int, char*));
 void				*ft_memmove(void *buf1, const void *buf2, size_t n);
 int					ft_strncmp(const char *s1, const char *s2, size_t n);
 int					ft_atoi(const char *str);
