@@ -9,7 +9,7 @@ static int	_calculate_space_to_print(long long int n, t_conversion_setting *conv
 	return (ret);
 }
 
-static int	_print_numbers(long long int n, t_conversion_setting *conversion_setting)
+static int	_print_numbers(long long int n)
 {
 	int	ret;
 
@@ -24,7 +24,7 @@ int	case_u(long long int n, t_conversion_setting *conversion_setting)
 
 	if (ft_is_flag_set(conversion_setting->flag, FLAG_MINUS))
 	{
-		ret = _print_numbers(n, conversion_setting);
+		ret = _print_numbers(n);
 		ret += print_n_c(' ', _calculate_space_to_print(n, conversion_setting));
 	}
 	else
@@ -33,7 +33,7 @@ int	case_u(long long int n, t_conversion_setting *conversion_setting)
 			ret = print_n_c('0', _calculate_space_to_print(n, conversion_setting));
 		else
 			ret = print_n_c(' ', _calculate_space_to_print(n, conversion_setting));
-		ret += _print_numbers(n, conversion_setting);
+		ret += _print_numbers(n);
 	}
 	return (ret);
 }
