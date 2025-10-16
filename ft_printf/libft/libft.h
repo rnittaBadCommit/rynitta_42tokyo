@@ -67,6 +67,8 @@ void				ft_putchar_fd(char c, int fd);
 void				ft_putstr_fd(char *s, int fd);
 void				ft_putendl_fd(char *s, int fd);
 void				ft_putnbr_fd(int n, int fd);
+int					ft_putnbr(int n);
+int					ft_putnbr_base(int n, char *base);
 
 t_list				*ft_lstnew(void *content);
 void				ft_lstadd_front(t_list **lst, t_list *new);
@@ -78,5 +80,12 @@ void				ft_lstclear(t_list **lst, void (*del)(void *));
 void				ft_lstiter(t_list *lst, void (*f)(void *));
 t_list				*ft_lstmap(t_list *lst, void *(*f)(void *), \
 void (*del)(void *));
+
+long long int		ft_abs(long long int n);
+int       			ft_count_digits(int n);
+int					ft_count_hex_digits(int n);
+int					ft_findc(char *s, char c);
+bool				ft_is_flag_set(t_flag to_check, t_flag flag);
+void				ft_unset_flag(t_flag *flag, t_flag flag_to_unset);
 
 #endif
