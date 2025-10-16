@@ -21,7 +21,7 @@ static int	_print_numbers(long long int n)
 
 	ret = 0;
 	ret += flush_buffer();
-	ret += ft_put_number(n);
+	ret += ft_putnbr(n);
 	return (ret);
 }
 

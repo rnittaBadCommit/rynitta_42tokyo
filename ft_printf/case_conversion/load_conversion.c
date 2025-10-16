@@ -15,15 +15,18 @@ static const char	*_load_flags(const char *s, t_flag *flag)
 	return (NULL);
 }
 
-static const char	*_load_width(const char *s, int *width, va_list *ap)
+static const char	*_load_width(const char *s, va_list *ap, t_conversion_setting *conversion_setting)
 {
 	int	width_;
 
 	if (*s == '*')
 	{
-		*width = va_arg(*ap, int);
-		if (*width < 0)
-			*width *= -1;
+		conversion_setting->width = va_arg(*ap, int);
+		if (conversion_setting->width < 0)
+		{
+			conversion_setting->width *= -1;
+			conversion_setting->flag |= FLAG_MINUS;
+		}
 		return (s + 1);
 	}
 	width_ = 0;
@@ -32,7 +35,29 @@ static const char	*_load_width(const char *s, int *width, va_list *ap)
 		width_ = width_ * 10 + *s - '0';
 		++s;
 	}
-	*width = width_;
+	conversion_setting->width = width_;
+	return (s);
+}
+
+static const char	*_load_precision(const char *s, va_list *ap, t_conversion_setting *conversion_setting)
+{
+	int	precision_;
+
+	if (*s != '.')
+		return (s);
+	++s;
+	if (*s == '*')
+	{
+		conversion_setting->precision = va_arg(*ap, int);
+		return (s + 1);
+	}
+	precision_ = 0;
+	while ('0' <= *s && *s <= '9')
+	{
+		precision_ = precision_ * 10 + *s - '0';
+		++s;
+	}
+	conversion_setting->precision = precision_;
 	return (s);
 }
 
@@ -52,8 +77,9 @@ int	load_conversion_setting(const char *s, va_list *ap, t_conversion_setting *co
 	++s;
 	ft_bzero(conversion_setting, sizeof(t_conversion_setting));
 	s = _load_flags(s, &conversion_setting->flag);
-	_finalize_flag(&conversion_setting->flag);
-	s = _load_width(s, &conversion_setting->width, ap);
+	s = _load_width(s, ap, conversion_setting);
+	s = _load_precision(s, ap, conversion_setting);
 	conversion_setting->conversion_type = *s;
+	_finalize_flag(&conversion_setting->flag);
 	return (s + 1 - save_s);
 }

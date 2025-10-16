@@ -19,7 +19,7 @@ static int	_print_numbers(long long int n)
 	return (ret);
 }
 
-static int	_print_symbol(long long int n)
+static int	_print_symbol(void)
 {
 	int	ret;
 
@@ -33,7 +33,7 @@ int	case_p(void *p, t_conversion_setting *conversion_setting)
 
 	if (ft_is_flag_set(conversion_setting->flag, FLAG_MINUS))
 	{
-		ret = _print_symbol((long long int)p);
+		ret = _print_symbol();
 		ret += _print_numbers((long long int)p);
 		ret += print_n_c(' ', _calculate_space_to_print((long long int)p, conversion_setting));
 	}
@@ -41,13 +41,13 @@ int	case_p(void *p, t_conversion_setting *conversion_setting)
 	{
 		if (ft_is_flag_set(conversion_setting->flag, FLAG_ZERO))
 		{
-			ret = _print_symbol((long long int)p);
+			ret = _print_symbol();
 			ret += print_n_c('0', _calculate_space_to_print((long long int)p, conversion_setting));
 		}
 		else
 		{
 			ret = print_n_c(' ', _calculate_space_to_print((long long int)p, conversion_setting));
-			ret += _print_symbol((long long int)p);
+			ret += _print_symbol();
 		}
 		ret += _print_numbers((long long int)p);
 	}

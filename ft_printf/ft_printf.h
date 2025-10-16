@@ -14,12 +14,13 @@
 # include <stdbool.h>
 # include <stdarg.h>
 
-# include "../libft/ft_libft.h"
+# include "./libft/libft.h"
 
 typedef struct s_conversion_setting
 {
 	t_flag	flag;
 	int		width;
+	int		precision;
 	char	conversion_type;
 }	t_conversion_setting;
 
