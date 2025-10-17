@@ -15,11 +15,10 @@ static int	__write_buf(char *buf, int len_buf, char *s, int len_s)
 	return (ret1 + ret2);
 }
 
-static int	_auto_flush_buffered_write(char *s, t_mode_buffered_write mode)
+static int	_auto_flush_buffered_write(char *s, int len_s, t_mode_buffered_write mode)
 {
 	static char	buf[BUFFER_SIZE];
 	static int	i_buf_end;
-	int			len_s;
 	int			ret;
 
 	if (mode == EXPLICIT_FLUSH)
@@ -28,7 +27,6 @@ static int	_auto_flush_buffered_write(char *s, t_mode_buffered_write mode)
 		i_buf_end = 0;
 		return (ret);
 	}
-	len_s = ft_strlen(s);
 	if (i_buf_end + len_s > BUFFER_SIZE)
 	{
 		ret = __write_buf(buf, i_buf_end, s, len_s);
@@ -43,14 +41,19 @@ static int	_auto_flush_buffered_write(char *s, t_mode_buffered_write mode)
 	}
 }
 
-int	auto_flush_buffered_write(char *s)
+int	auto_flush_buffered_putstr(char *s)
 {
-	return (_auto_flush_buffered_write(s, NORMAL_WRITE));
+	return (_auto_flush_buffered_write(s, ft_strlen(s), NORMAL_WRITE));
+}
+
+int auto_flush_buffered_write(char *s, size_t size)
+{
+	return (_auto_flush_buffered_write(s, size, NORMAL_WRITE));
 }
 
 int	flush_buffer(void)
 {
-	return (_auto_flush_buffered_write(NULL, EXPLICIT_FLUSH));
+	return (_auto_flush_buffered_write(NULL, 0, EXPLICIT_FLUSH));
 }
 
 // #include <stdio.h>
@@ -64,7 +67,7 @@ int	flush_buffer(void)
 // 		while (argv[i])
 // 		{
 // 			printf("i: %d\n", i);
-// 			auto_flush_buffered_write(argv[i]);
+// 			auto_flush_buffered_putstr(argv[i]);
 // 			printf("\n");
 // 			++i;
 // 		}
@@ -75,19 +78,19 @@ int	flush_buffer(void)
 // 	}
 // 	else
 // 	{
-// 		auto_flush_buffered_write("1");
+// 		auto_flush_buffered_putstr("1");
 // 		printf("\n");
-// 		auto_flush_buffered_write("2");
+// 		auto_flush_buffered_putstr("2");
 // 		printf("\n");
-// 		auto_flush_buffered_write("3");
+// 		auto_flush_buffered_putstr("3");
 // 		printf("\n");
-// 		auto_flush_buffered_write("4");
+// 		auto_flush_buffered_putstr("4");
 // 		printf("\n");
-// 		auto_flush_buffered_write("5");
+// 		auto_flush_buffered_putstr("5");
 // 		printf("\n");
-// 		auto_flush_buffered_write("67");
+// 		auto_flush_buffered_putstr("67");
 // 		printf("\n");
-// 		auto_flush_buffered_write("abcd");
+// 		auto_flush_buffered_putstr("abcd");
 // 		printf("\n");
 // 	}
 // }

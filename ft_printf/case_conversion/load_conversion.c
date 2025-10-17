@@ -45,6 +45,7 @@ static const char	*_load_precision(const char *s, va_list *ap, t_conversion_sett
 
 	if (*s != '.')
 		return (s);
+	conversion_setting->flag |= FLAG_DOT;
 	++s;
 	if (*s == '*')
 	{

@@ -12,13 +12,26 @@
 
 #include "libft.h"
 
-int	ft_count_hex_digits(int n)
+int	ft_count_hex_digits(long long int n)
 {
 	int	ret;
 
 	n = ft_abs(n);
 	ret = 1;
-	while (n > 15)
+	while (n >= 16)
+	{
+		n /= 16;
+		++ret;
+	}
+	return (ret);
+}
+
+int	ft_count_unsigned_hex_digits(unsigned long long int n)
+{
+	int	ret;
+
+	ret = 1;
+	while (n >= 16)
 	{
 		n /= 16;
 		++ret;
