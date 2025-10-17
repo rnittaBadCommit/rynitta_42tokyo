@@ -36,11 +36,12 @@ typedef struct s_conversion_setting
 # define FLAG_SHARP (1 << 2)
 # define FLAG_SPACE (1 << 3)
 # define FLAG_PLUS (1 << 4)
+# define FLAG_DOT (1 << 5)
 
 
 int	ft_printf(const char *format, ...);
 
-int	auto_flush_buffered_write(char *s);
+int	auto_flush_buffered_putstr(char *s);
 int	load_conversion_setting(const char *s, va_list *ap, t_conversion_setting *conversion_setting);
 bool	is_conversion(const char *s);
 
