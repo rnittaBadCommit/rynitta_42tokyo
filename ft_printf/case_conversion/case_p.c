@@ -4,6 +4,8 @@ static int	_calculate_len_space(unsigned long long int n, t_conversion_setting *
 {
 	int	ret;
 
+	if (n == 0)
+		return (conversion_setting->width - ft_strlen("(nil)"));
 	ret = conversion_setting->width;
 	ret -= 2;
 	ret -= ft_count_unsigned_hex_digits(n);
@@ -14,7 +16,9 @@ static int	_print_numbers(unsigned long long int n)
 {
 	int	ret;
 
-	ret = flush_buffer();
+	if (n == 0)
+		return (auto_flush_buffered_putstr("(nil)"));	
+ 	ret = flush_buffer();
 	ret  += ft_put_unsigned_nbr_base(n, "0123456789abcdef");
 	return (ret);
 }
