@@ -1,5 +1,4 @@
-#include "../ft_printf.h"
-#include <stdio.h>
+#include "libft.h"
 
 static int	__write_buf(char *buf, int len_buf, char *s, int len_s)
 {
@@ -43,12 +42,30 @@ static int	_auto_flush_buffered_write(char *s, int len_s, t_mode_buffered_write 
 
 int	auto_flush_buffered_putstr(char *s)
 {
-	return (_auto_flush_buffered_write(s, ft_strlen(s), NORMAL_WRITE));
+	int		ret;
+	char	*tmp;
+
+	tmp = ft_strrchr(s, '\n');
+	if (!tmp)
+		return (_auto_flush_buffered_write(s, ft_strlen(s), NORMAL_WRITE));
+	ret = _auto_flush_buffered_write(s, tmp - s + 1, NORMAL_WRITE);
+	ret += flush_buffer();
+	ret += _auto_flush_buffered_write(tmp + 1, ft_strlen(s) - (tmp - s + 1), NORMAL_WRITE);
+	return (ret);
 }
 
-int auto_flush_buffered_write(char *s, size_t size)
+int auto_flush_buffered_write(void *p, size_t size)
 {
-	return (_auto_flush_buffered_write(s, size, NORMAL_WRITE));
+	int		ret;
+	void	*tmp;
+
+	tmp = ft_memrchr(p, '\n', size);
+	if (!tmp)
+		return (_auto_flush_buffered_write(p, size, NORMAL_WRITE));
+	ret = _auto_flush_buffered_write(p, tmp - p + 1, NORMAL_WRITE);
+	ret += flush_buffer();
+	ret += _auto_flush_buffered_write(tmp + 1, size - (tmp - p + 1), NORMAL_WRITE);
+	return (ret);
 }
 
 int	flush_buffer(void)

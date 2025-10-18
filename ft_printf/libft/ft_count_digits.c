@@ -16,6 +16,8 @@ int	ft_count_digits(long long int n)
 {
 	int	ret;
 
+	if (n == INT64_MIN)
+		n = INT64_MAX;
 	n = ft_abs(n);
 	ret = 1;
 	while (n > 9)

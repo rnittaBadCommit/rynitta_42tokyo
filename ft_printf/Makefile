@@ -1,6 +1,6 @@
-SRCS    = ft_printf.c auto_flush_buffered_write/auto_flush_buffered_write.c \
+SRCS    = ft_printf.c \
 	case_conversion/case_c.c  case_conversion/case_d.c  case_conversion/case_p.c  case_conversion/case_s.c  case_conversion/case_u.c case_conversion/case_xX.c \
-	case_conversion/load_conversion.c case_conversion/utils.c is_conversion.c
+	case_conversion/load_conversion.c case_conversion/calculate_len_numbers.c case_conversion/calculate_len_numbers_unsigned.c is_conversion.c
 
 SRCS_BONUS = ft_printf.c is_conversion.c 
 

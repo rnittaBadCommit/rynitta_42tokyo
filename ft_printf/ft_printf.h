@@ -25,7 +25,6 @@ typedef struct s_conversion_setting
 }	t_conversion_setting;
 
 
-# include "auto_flush_buffered_write/auto_flush_buffered_write.h"
 # include "case_conversion/case_conversion.h"
 
 # define CONVERSION_CHARACTERS "cspdiuxX%%"

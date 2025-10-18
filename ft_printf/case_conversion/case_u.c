@@ -3,9 +3,13 @@
 static int	_calculate_len_space(unsigned int n, t_conversion_setting *conversion_setting)
 {
 	int	ret;
+	int	len_numbers;
 
 	ret = conversion_setting->width;
-	ret -= ft_count_unsigned_digits((long long int)n);
+	len_numbers = ft_count_unsigned_digits(n);
+	if (len_numbers < conversion_setting->precision)
+		len_numbers = conversion_setting->precision;
+	ret -= len_numbers;
 	if (n == 0 && ft_is_flag_set(conversion_setting->flag, FLAG_DOT) && conversion_setting->precision == 0)
 		++ret;
 	return (ret);
