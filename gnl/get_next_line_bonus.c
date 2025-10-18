@@ -70,7 +70,7 @@ char	*case_need_to_read(t_save_list_node *node)
 		if (i_linebreak == NOT_FOUND)
 			ret = ft_strndup(node->save_data, node->len_data);
 		else
-			ret = ft_strndup(node->save_data, i_linebreak + 1);
+			ret = ft_strndup(node->save_data, i_linebreak);
 	}
 	return (ret);
 }
@@ -87,7 +87,7 @@ char	*get_next_line(int fd)
 		return (NULL);
 	len = calculate_index_c(node->save_data, node->len_data, '\n');
 	if (len != NOT_FOUND)
-		ret = ft_strndup(node->save_data, len + 1);
+		ret = ft_strndup(node->save_data, len);
 	else
 		ret = case_need_to_read(node);
 	if (!ret)

@@ -27,12 +27,12 @@ int main(int argc, char **argv)
 		i = 0;
 		while (1)
 		{
-			if (i == 20)
-				i = i;
+			//if (i == 4)
+			//	break;
 			ret = get_next_line(fd);
 			if (!ret)
 				break;
-			write(1, "\n", 1);
+			printf("%s", ret);
 			++i;
 		}
 	}
