@@ -16,8 +16,8 @@ int	ft_count_hex_digits(long long int n)
 {
 	int	ret;
 
-	if (n == INT64_MIN)
-		n = INT64_MAX;
+	if (n == LLONG_MIN)
+		n = LLONG_MAX;
 	n = ft_abs(n);
 	ret = 1;
 	while (n >= 16)
