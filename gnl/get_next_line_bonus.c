@@ -1,4 +1,16 @@
-#include "get_next_line.h"
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   get_next_line_bonus.c                              :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: rynitta <rynitta@student.42tokyo.jp>       +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/10/18 13:54:09 by rynitta           #+#    #+#             */
+/*   Updated: 2025/10/18 13:55:00 by rynitta          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+#include "get_next_line_bonus.h"
 
 void	update_node(t_save_list_node *save_list, t_save_list_node *node)
 {
@@ -12,7 +24,8 @@ void	update_node(t_save_list_node *save_list, t_save_list_node *node)
 		return ;
 	}
 	tmp = node->save_data;
-	node->save_data = ft_strndup(node->save_data + i_linebreak + 1, node->len_data - i_linebreak - 1);
+	node->save_data = ft_strndup(node->save_data + i_linebreak + 1, \
+		node->len_data - i_linebreak - 1);
 	if (!node->save_data)
 	{
 		delete_save_list_node(save_list, node->fd);
@@ -37,7 +50,8 @@ t_status	read_process(t_save_list_node *node, char *buf)
 			return (READ_FINISHED);
 		buf[ret] = '\0';
 		tmp = node->save_data;
-		node->save_data = ft_strcatdup(node->save_data, node->len_data, buf, ret);
+		node->save_data = \
+			ft_strcatdup(node->save_data, node->len_data, buf, ret);
 		free(tmp);
 		if (!node->save_data)
 			return (ERROR);

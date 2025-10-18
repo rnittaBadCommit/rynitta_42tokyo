@@ -1,4 +1,16 @@
-#include "get_next_line.h"
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   get_next_line_utils_bonus.c                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: rynitta <rynitta@student.42tokyo.jp>       +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/10/18 13:54:25 by rynitta           #+#    #+#             */
+/*   Updated: 2025/10/18 13:55:00 by rynitta          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+#include "get_next_line_bonus.h"
 
 void	delete_save_list_node(t_save_list_node *save_list, int fd_to_delete)
 {
@@ -20,7 +32,8 @@ void	delete_save_list_node(t_save_list_node *save_list, int fd_to_delete)
 	}
 }
 
-t_save_list_node	*find_or_create_save_list_node(t_save_list_node *save_list, int fd_to_find)
+t_save_list_node	*find_or_create_save_list_node( \
+	t_save_list_node *save_list, int fd_to_find)
 {
 	t_save_list_node	*node_;
 	t_save_list_node	*new_node_;
@@ -80,7 +93,8 @@ char	*ft_strndup(char *s, int len)
 	return (ret);
 }
 
-char	*ft_strcatdup(char *original, int len_original, char *to_append, int len_append)
+char	*ft_strcatdup(char *original, int len_original, \
+	char *to_append, int len_append)
 {
 	int		i;
 	int		i_ret;
