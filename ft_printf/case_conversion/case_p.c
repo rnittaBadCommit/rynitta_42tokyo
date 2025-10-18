@@ -1,61 +1,56 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   case_p.c                                           :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: rynitta <rynitta@student.42tokyo.jp>       +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/10/18 11:47:25 by rynitta           #+#    #+#             */
+/*   Updated: 2025/10/18 11:48:42 by rynitta          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../ft_printf.h"
 
-static int	_calculate_len_space(unsigned long long int n, t_conversion_setting *conversion_setting)
-{
-	int	ret;
+#include "../ft_printf.h"
 
-	if (n == 0)
-		return (conversion_setting->width - ft_strlen("(nil)"));
-	ret = conversion_setting->width;
-	ret -= 2;
-	ret -= ft_count_unsigned_hex_digits(n);
-	return (ret);
+static int	__print_symbol(unsigned long long int n)
+{
+	if (n)
+		return (auto_flush_buffered_putstr("0x"));
+	return (0);
 }
 
 static int	_print_numbers(unsigned long long int n)
 {
 	int	ret;
 
-	if (n == 0)
-		return (auto_flush_buffered_putstr("(nil)"));	
- 	ret = flush_buffer();
-	ret  += ft_put_unsigned_nbr_base(n, "0123456789abcdef");
-	return (ret);
-}
-
-static int	_print_symbol(void *p)
-{
-	int	ret;
-
-	ret = 0;
-	if (p != NULL)
-		ret = auto_flush_buffered_putstr("0x");
+	ret = __print_symbol(n);
+	ret += flush_buffer();
+	if (!n)
+		ret += auto_flush_buffered_putstr("(nil)");
+	else
+		ret += ft_put_unsigned_nbr_base(n, "0123456789abcdef");
 	return (ret);
 }
 
 int	case_p(void *p, t_conversion_setting *conversion_setting)
 {
-	int	ret;
+	int						ret;
+	unsigned long long int	n;
 
+	n = (unsigned long long int)p;
 	if (ft_is_flag_set(conversion_setting->flag, FLAG_MINUS))
 	{
-		ret = _print_symbol(p);
-		ret += _print_numbers((unsigned long long int)p);
-		ret += print_n_c(' ', _calculate_len_space((unsigned long long int)p, conversion_setting));
+		ret = _print_numbers(n);
+		ret += print_n_c(' ', conversion_setting->width \
+			- calculate_len_numbers_unsigned(n, conversion_setting));
 	}
 	else
 	{
-		if (ft_is_flag_set(conversion_setting->flag, FLAG_ZERO))
-		{
-			ret = _print_symbol(p);
-			ret += print_n_c('0', _calculate_len_space((unsigned long long int)p, conversion_setting));
-		}
-		else
-		{
-			ret = print_n_c(' ', _calculate_len_space((unsigned long long int)p, conversion_setting));
-			ret += _print_symbol(p);
-		}
-		ret += _print_numbers((unsigned long long int)p);
+		ret = print_n_c(' ', conversion_setting->width \
+			- calculate_len_numbers_unsigned(n, conversion_setting));
+		ret += _print_numbers(n);
 	}
 	return (ret);
 }

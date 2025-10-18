@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_printf.c                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: rynitta <rynitta@student.42tokyo.jp>       +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/10/18 11:38:39 by rynitta           #+#    #+#             */
+/*   Updated: 2025/10/18 11:53:02 by rynitta          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "ft_printf.h"
 
 int	switch_conversion(va_list *ap, t_conversion_setting conversion_setting)
@@ -15,12 +27,11 @@ int	switch_conversion(va_list *ap, t_conversion_setting conversion_setting)
 	else if (conversion_setting.conversion_type == 'u')
 		return (case_u(va_arg(*ap, unsigned int), &conversion_setting));
 	else if (conversion_setting.conversion_type == 'x')
-		return (case_xX(va_arg(*ap, unsigned int), &conversion_setting));
+		return (case_xx(va_arg(*ap, unsigned int), &conversion_setting));
 	else if (conversion_setting.conversion_type == 'X')
-		return (case_xX(va_arg(*ap, unsigned int), &conversion_setting));
+		return (case_xx(va_arg(*ap, unsigned int), &conversion_setting));
 	else if (conversion_setting.conversion_type == '%')
 		return (case_c('%', &conversion_setting));
-
 	return (-1);
 }
 
@@ -50,122 +61,105 @@ int	ft_printf(const char *str, ...)
 	return (ret);
 }
 
-#include <stdio.h>
-#include <ulimit.h>
-#include <limits.h> 
+// #include <stdio.h>
+// #include <ulimit.h>
+// #include <limits.h> 
 
+// // int main()
+// // {
+// // printf(" %-13p %-14p \n", ULONG_MAX, -ULONG_MAX);
+// // ft_printf(" %-13p %-14p \n", ULONG_MAX, -ULONG_MAX);
 
+// // printf(" %5.3d \n", 11);
+// // ft_printf(" %5.3d \n", 11);
 
-// int main()
-// {
-// printf(" %-13p %-14p \n", ULONG_MAX, -ULONG_MAX);
-// ft_printf(" %-13p %-14p \n", ULONG_MAX, -ULONG_MAX);
+// // printf(" %.3d \n", 11);
+// // ft_printf(" %.3d \n", 11);
 
+// // printf(" %2.3d \n", 11);
+// // ft_printf(" %2.3d \n", 11);;
 
-// printf(" %5.3d \n", 11);
-// ft_printf(" %5.3d \n", 11);
+// // printf(" %1.3d \n", 11);
+// // ft_printf(" %1.3d \n", 11);
 
-// printf(" %.3d \n", 11);
-// ft_printf(" %.3d \n", 11);
+// // printf(" %1.0d \n", 11);
+// // ft_printf(" %1.0d \n", 11);
 
-// printf(" %2.3d \n", 11);
-// ft_printf(" %2.3d \n", 11);;
+// // printf(" %5.3d \n", -11);
+// // ft_printf(" %5.3d \n", -11);
 
-// printf(" %1.3d \n", 11);
-// ft_printf(" %1.3d \n", 11);
+// // printf(" %.3d \n", -11);
+// // ft_printf(" %.3d \n", -11);
 
-// printf(" %1.0d \n", 11);
-// ft_printf(" %1.0d \n", 11);
+// // printf(" %2.3d \n", -11);
+// // ft_printf(" %2.3d \n", -11);;
 
+// // printf(" %1.3d \n", -11);
+// // ft_printf(" %1.3d \n", -11);
 
+//   ft_printf("0[%p\n]", -1);
 
+// 	setvbuf(stdout, 0, _IONBF, 0);
+//   ft_printf("1[%10c]\n", 'a');
+//   ft_printf("2[%-10c]\n", 'a');
 
-// printf(" %5.3d \n", -11);
-// ft_printf(" %5.3d \n", -11);
+//   ft_printf("3[%u]\n", 42);
+//   ft_printf("4[%010u]\n", 42);
 
-// printf(" %.3d \n", -11);
-// ft_printf(" %.3d \n", -11);
+//   int *p = (void *)10;
+//   ft_printf("5[%10p]\n", p);
 
-// printf(" %2.3d \n", -11);
-// ft_printf(" %2.3d \n", -11);;
+//   ft_printf("\n");
+//   ft_printf("6[%-10p]\n", p);
 
+//   ft_printf("\n");
+//   ft_printf("\n");  
+//   ft_printf("7[%10p]\n", NULL);
 
-// printf(" %1.3d \n", -11);
-// ft_printf(" %1.3d \n", -11);
+//   ft_printf("\n");
+//   ft_printf("8[%-10p]\n", NULL);
+
+//   ft_printf("9[%10x]\n", 42);
+//   ft_printf("10[%010x]\n", 42);
+
+//   ft_printf("\n");
+//   ft_printf("11[%-10x]\n", 42);
+
+//   ft_printf("12[% d]\n", 42);
+//   ft_printf("13[%10d]\n", 42);
+//   ft_printf("14[%010d]\n", 42);
+//   ft_printf("15[% 10d]\n", 42);
+
+//   ft_printf("\n");
+//   ft_printf("16[%-10d]\n", 42);
+//   ft_printf("17[%- 10d]\n", 42);
+
+//   ft_printf("\n");
+//   ft_printf("\n");
+//   ft_printf("18[% d]\n", -42);
+//   ft_printf("19[%10d]\n", -42);
+//   ft_printf("20[%010d]\n", -42);
+//   ft_printf("21[% 10d]\n", -42);
+
+//   ft_printf("\n");
+//   ft_printf("22[%-10d]\n", -42);
+//   ft_printf("23[%- 10d]\n", -42);
+
+//   ft_printf("\n");
+//   ft_printf("24[% *d]\n", 10, -42);
+//   ft_printf("25[%0*d]\n", 10, -42);
+//   ft_printf("26[%- *d]\n", 10, -42);
+
+//   ft_printf("\n");
+//   ft_printf("27[% *d]\n", -10, -42);
+//   ft_printf("28[%0*d]\n", -10, -42);
+//   ft_printf("29[%- *d]\n", -10, -42);
+
+// 	ft_printf("\n");
+//   ft_printf("30[% *%]\n", -10);
+//   ft_printf("31[%0*%]\n", -10);
+//   ft_printf("32[%- *%]\n", -10);
+
+//   return (0);
+
 // }
-
-int mainz()
-{
-
-  ft_printf("0[%p\n]", -1);
-
-	setvbuf(stdout, 0, _IONBF, 0);
-  ft_printf("1[%10c]\n", 'a');
-  ft_printf("2[%-10c]\n", 'a');
-
-  ft_printf("3[%u]\n", 42);
-  ft_printf("4[%010u]\n", 42);
-
-
-  int *p = (void *)10;
-  ft_printf("5[%10p]\n", p);
-
-  ft_printf("\n");
-  ft_printf("6[%-10p]\n", p);
-
-
-  ft_printf("\n");
-  ft_printf("\n");  
-  ft_printf("7[%10p]\n", NULL);
-
-  ft_printf("\n");
-  ft_printf("8[%-10p]\n", NULL);
-
-  
-
-  ft_printf("9[%10x]\n", 42);
-  ft_printf("10[%010x]\n", 42);
-
-  ft_printf("\n");
-  ft_printf("11[%-10x]\n", 42);
-
-  
-  ft_printf("12[% d]\n", 42);
-  ft_printf("13[%10d]\n", 42);
-  ft_printf("14[%010d]\n", 42);
-  ft_printf("15[% 10d]\n", 42);
-
-  ft_printf("\n");
-  ft_printf("16[%-10d]\n", 42);
-  ft_printf("17[%- 10d]\n", 42);
-
-  ft_printf("\n");
-  ft_printf("\n");
-  ft_printf("18[% d]\n", -42);
-  ft_printf("19[%10d]\n", -42);
-  ft_printf("20[%010d]\n", -42);
-  ft_printf("21[% 10d]\n", -42);
-
-  ft_printf("\n");
-  ft_printf("22[%-10d]\n", -42);
-  ft_printf("23[%- 10d]\n", -42);
-
-
-  ft_printf("\n");
-  ft_printf("24[% *d]\n", 10, -42);
-  ft_printf("25[%0*d]\n", 10, -42);
-  ft_printf("26[%- *d]\n", 10, -42);
-
-  ft_printf("\n");
-  ft_printf("27[% *d]\n", -10, -42);
-  ft_printf("28[%0*d]\n", -10, -42);
-  ft_printf("29[%- *d]\n", -10, -42);
-
-	ft_printf("\n");
-  ft_printf("30[% *%]\n", -10);
-  ft_printf("31[%0*%]\n", -10);
-  ft_printf("32[%- *%]\n", -10);
-
-  return (0);
-
-}

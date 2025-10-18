@@ -1,5 +1,5 @@
 SRCS    = ft_printf.c \
-	case_conversion/case_c.c  case_conversion/case_d.c  case_conversion/case_p.c  case_conversion/case_s.c  case_conversion/case_u.c case_conversion/case_xX.c \
+	case_conversion/case_c.c  case_conversion/case_d.c  case_conversion/case_p.c  case_conversion/case_s.c  case_conversion/case_u.c case_conversion/case_xx.c \
 	case_conversion/load_conversion.c case_conversion/calculate_len_numbers.c case_conversion/calculate_len_numbers_unsigned.c is_conversion.c
 
 SRCS_BONUS = ft_printf.c is_conversion.c 
@@ -15,6 +15,7 @@ LIBR    = ranlib
 CC      = cc
 RM      = rm -f
 CFLAGS  = -Wall -Wextra -Werror 
+
 
 LIB_DIR = libft
 LIB_NAME = libft

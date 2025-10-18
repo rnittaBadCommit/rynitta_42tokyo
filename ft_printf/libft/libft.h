@@ -6,7 +6,7 @@
 /*   By: rynitta <rynitta@student.42tokyo.jp>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/16 02:58:57 by rynitta           #+#    #+#             */
-/*   Updated: 2025/10/16 05:57:53 by rynitta          ###   ########.fr       */
+/*   Updated: 2025/10/18 09:32:07 by rynitta          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,7 +71,7 @@ void				ft_putchar_fd(char c, int fd);
 void				ft_putstr_fd(char *s, int fd);
 void				ft_putendl_fd(char *s, int fd);
 void				ft_putnbr_fd(int n, int fd);
-int					ft_putnbr(int n);
+int					ft_putnbr(long long int n);
 int					ft_putnbr_base(int n, char *base);
 int					ft_put_unsigned_nbr(unsigned long long int n);
 int					ft_put_unsigned_nbr_base(unsigned long long int n, char *base);

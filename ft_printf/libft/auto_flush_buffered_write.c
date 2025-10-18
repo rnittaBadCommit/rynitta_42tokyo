@@ -1,6 +1,18 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   auto_flush_buffered_write.c                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: rynitta <rynitta@student.42tokyo.jp>       +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/10/18 11:54:06 by rynitta           #+#    #+#             */
+/*   Updated: 2025/10/18 11:54:54 by rynitta          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "libft.h"
 
-static int	__write_buf(char *buf, int len_buf, char *s, int len_s)
+static int	__write_buf(const char *buf, int len_buf, const char *s, int len_s)
 {
 	int	ret1;
 	int	ret2;
@@ -14,7 +26,8 @@ static int	__write_buf(char *buf, int len_buf, char *s, int len_s)
 	return (ret1 + ret2);
 }
 
-static int	_auto_flush_buffered_write(char *s, int len_s, t_mode_buffered_write mode)
+static int	_auto_flush_buffered_write(const char *s, int len_s, \
+	t_mode_buffered_write mode)
 {
 	static char	buf[BUFFER_SIZE];
 	static int	i_buf_end;
@@ -40,7 +53,7 @@ static int	_auto_flush_buffered_write(char *s, int len_s, t_mode_buffered_write 
 	}
 }
 
-int	auto_flush_buffered_putstr(char *s)
+int	auto_flush_buffered_putstr(const char *s)
 {
 	int		ret;
 	char	*tmp;
@@ -50,11 +63,12 @@ int	auto_flush_buffered_putstr(char *s)
 		return (_auto_flush_buffered_write(s, ft_strlen(s), NORMAL_WRITE));
 	ret = _auto_flush_buffered_write(s, tmp - s + 1, NORMAL_WRITE);
 	ret += flush_buffer();
-	ret += _auto_flush_buffered_write(tmp + 1, ft_strlen(s) - (tmp - s + 1), NORMAL_WRITE);
+	ret += _auto_flush_buffered_write(tmp + 1, \
+		ft_strlen(s) - (tmp - s + 1), NORMAL_WRITE);
 	return (ret);
 }
 
-int auto_flush_buffered_write(void *p, size_t size)
+int	auto_flush_buffered_write(const void *p, size_t size)
 {
 	int		ret;
 	void	*tmp;
@@ -64,7 +78,8 @@ int auto_flush_buffered_write(void *p, size_t size)
 		return (_auto_flush_buffered_write(p, size, NORMAL_WRITE));
 	ret = _auto_flush_buffered_write(p, tmp - p + 1, NORMAL_WRITE);
 	ret += flush_buffer();
-	ret += _auto_flush_buffered_write(tmp + 1, size - (tmp - p + 1), NORMAL_WRITE);
+	ret += _auto_flush_buffered_write(tmp + 1, \
+		size - (tmp - p + 1), NORMAL_WRITE);
 	return (ret);
 }
 
@@ -77,7 +92,7 @@ int	flush_buffer(void)
 // int main(int argc, char **argv)
 // {
 // 	int	i;
-	
+
 // 	if (argc > 1)
 // 	{
 // 		i = 1;

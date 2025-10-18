@@ -1,20 +1,32 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_putnbr.c                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: rynitta <rynitta@student.42tokyo.jp>       +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/10/18 11:51:09 by rynitta           #+#    #+#             */
+/*   Updated: 2025/10/18 11:51:22 by rynitta          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "libft.h"
 
-int	ft_putnbr(int n)
+int	ft_putnbr(long long int n)
 {
-	long long int	lln;
 	char			buf[11];
 	int				i;
-	
-	lln = n;
+
+	if (n == LLONG_MIN)
+		return (write(1, "-9223372036854775807", 20));
 	if (n < 0)
-		lln *= -1;
-	buf[10] = '0' + lln % 10;
+		n *= -1;
+	buf[10] = '0' + n % 10;
 	i = 9;
-	while (lln >= 10)
+	while (n >= 10)
 	{
-		lln /= 10;
-		buf[i] = '0' + lln % 10;
+		n /= 10;
+		buf[i] = '0' + n % 10;
 		--i;
 	}
 	if (n < 0)
@@ -31,7 +43,7 @@ int	ft_putnbr_base(int n, char *base)
 	char			buf[33];
 	int				i;
 	int				len_base;
-	
+
 	len_base = ft_strlen(base);
 	lln = n;
 	if (n < 0)

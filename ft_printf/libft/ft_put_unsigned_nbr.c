@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_put_unsigned_nbr.c                              :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: rynitta <rynitta@student.42tokyo.jp>       +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/10/18 11:50:50 by rynitta           #+#    #+#             */
+/*   Updated: 2025/10/18 11:50:52 by rynitta          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "libft.h"
 
 int	ft_put_unsigned_nbr(unsigned long long int n)
@@ -28,7 +40,7 @@ int	ft_put_unsigned_nbr_base(unsigned long long int n, char *base)
 	while (n >= len_base)
 	{
 		n /= len_base;
-		buf[i]= base[n % len_base];
+		buf[i] = base[n % len_base];
 		--i;
 	}
 	return (write(1, buf + i + 1, 63 - i));

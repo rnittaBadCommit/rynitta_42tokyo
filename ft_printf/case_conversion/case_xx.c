@@ -1,32 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   case_d.c                                           :+:      :+:    :+:   */
+/*   case_xx.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: rynitta <rynitta@student.42tokyo.jp>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/10/18 11:47:02 by rynitta           #+#    #+#             */
-/*   Updated: 2025/10/18 11:47:03 by rynitta          ###   ########.fr       */
+/*   Created: 2025/10/18 11:54:33 by rynitta           #+#    #+#             */
+/*   Updated: 2025/10/18 11:54:54 by rynitta          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../ft_printf.h"
 
-static int	__print_symbol(long long int n, t_flag flag)
+static int	__print_symbol(unsigned long long int n, \
+	t_conversion_setting *conversion_setting)
 {
-	int	ret;
-
-	ret = 0;
-	if (n < 0)
-		ret += auto_flush_buffered_putstr("-");
-	else if (ft_is_flag_set(flag, FLAG_PLUS))
-		ret += auto_flush_buffered_putstr("+");
-	else if (ft_is_flag_set(flag, FLAG_SPACE))
-		ret += auto_flush_buffered_putstr(" ");
-	return (ret);
+	if (n && ft_is_flag_set(conversion_setting->flag, FLAG_SHARP))
+	{
+		if (conversion_setting->conversion_type == 'x')
+			return (auto_flush_buffered_putstr("0x"));
+		else
+			return (auto_flush_buffered_putstr("0X"));
+	}
+	return (0);
 }
 
-static int	_print_numbers(long long int n, \
+static int	_print_numbers(unsigned long long int n, \
 	t_conversion_setting *conversion_setting)
 {
 	int	ret;
@@ -34,23 +33,23 @@ static int	_print_numbers(long long int n, \
 	if (n == 0 && ft_is_flag_set(conversion_setting->flag, FLAG_DOT) \
 		&& conversion_setting->precision == 0)
 		return (0);
-	__print_symbol(n, conversion_setting->flag);
-	ret = 0;
+	ret = __print_symbol(n, conversion_setting);
 	if (ft_is_flag_set(conversion_setting->flag, FLAG_ZERO) \
 		&& conversion_setting->width > conversion_setting->precision)
-		ret += print_n_c('0', calculate_len_numbers(n, \
-			conversion_setting) - ((n < 0) + ft_count_digits(n)));
+		ret += print_n_c('0', calculate_len_numbers(n, conversion_setting) \
+			- ft_count_unsigned_hex_digits(n));
 	else
-		ret += print_n_c('0', \
-			conversion_setting->precision - ft_count_digits(n));
+		ret += print_n_c('0', conversion_setting->precision \
+			- ft_count_unsigned_hex_digits(n));
 	ret += flush_buffer();
-	if (n < 0)
-		n *= -1;
-	ret += ft_putnbr(n);
+	if (conversion_setting->conversion_type == 'x')
+		ret += ft_put_unsigned_nbr_base(n, "0123456789abcdef");
+	else
+		ret += ft_put_unsigned_nbr_base(n, "0123456789ABCDEF");
 	return (ret);
 }
 
-int	case_di(long long int n, t_conversion_setting *conversion_setting)
+int	case_xx(unsigned long long int n, t_conversion_setting *conversion_setting)
 {
 	int	ret;
 

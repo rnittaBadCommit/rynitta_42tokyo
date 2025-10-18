@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   load_conversion.c                                  :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: rynitta <rynitta@student.42tokyo.jp>       +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/10/18 11:53:37 by rynitta           #+#    #+#             */
+/*   Updated: 2025/10/18 11:54:15 by rynitta          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../ft_printf.h"
 
 static const char	*_load_flags(const char *s, t_flag *flag)
@@ -15,7 +27,8 @@ static const char	*_load_flags(const char *s, t_flag *flag)
 	return (NULL);
 }
 
-static const char	*_load_width(const char *s, va_list *ap, t_conversion_setting *conversion_setting)
+static const char	*_load_width(const char *s, va_list *ap, \
+	t_conversion_setting *conversion_setting)
 {
 	int	width_;
 
@@ -39,7 +52,8 @@ static const char	*_load_width(const char *s, va_list *ap, t_conversion_setting 
 	return (s);
 }
 
-static const char	*_load_precision(const char *s, va_list *ap, t_conversion_setting *conversion_setting)
+static const char	*_load_precision(const char *s, va_list *ap, \
+	t_conversion_setting *conversion_setting)
 {
 	int	precision_;
 
@@ -70,7 +84,8 @@ static void	_finalize_flag(t_flag *flag)
 		ft_unset_flag(flag, FLAG_SPACE);
 }
 
-int	load_conversion_setting(const char *s, va_list *ap, t_conversion_setting *conversion_setting)
+int	load_conversion_setting(const char *s, va_list *ap, \
+	t_conversion_setting *conversion_setting)
 {
 	const char	*save_s;
 
