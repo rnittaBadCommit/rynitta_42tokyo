@@ -6,7 +6,7 @@
 /*   By: rynitta <rynitta@student.42tokyo.jp>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/16 02:53:39 by rynitta           #+#    #+#             */
-/*   Updated: 2025/10/16 05:38:19 by rynitta          ###   ########.fr       */
+/*   Updated: 2025/10/24 21:36:24 by rynitta          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,6 +53,7 @@ char	*ft_itoa(int n)
 	ret = (char *)malloc(len_ret + 1);
 	if (!ret)
 		return (ret);
+	ret[len_ret] = '\0';
 	if (n < 0)
 		ret[0] = '-';
 	_fill_numbers(ret, lln, len_ret);
