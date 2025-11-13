@@ -6,7 +6,7 @@
 /*   By: rynitta <rynitta@student.42tokyo.jp>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/18 13:54:35 by rynitta           #+#    #+#             */
-/*   Updated: 2025/10/18 13:57:56 by rynitta          ###   ########.fr       */
+/*   Updated: 2025/11/14 00:54:01 by rynitta          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ typedef struct s_save_list_node
 }	t_save_list_node;
 
 # ifndef BUFFER_SIZE
-#  define BUFFER_SIZE 3
+#  define BUFFER_SIZE 42
 # endif
 
 # define NOT_FOUND -1

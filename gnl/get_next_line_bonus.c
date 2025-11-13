@@ -6,7 +6,7 @@
 /*   By: rynitta <rynitta@student.42tokyo.jp>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/18 13:54:09 by rynitta           #+#    #+#             */
-/*   Updated: 2025/10/18 13:55:00 by rynitta          ###   ########.fr       */
+/*   Updated: 2025/11/14 00:52:34 by rynitta          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,6 @@ t_status	read_process(t_save_list_node *node, char *buf)
 			return (ERROR);
 		if (ret == 0)
 			return (READ_FINISHED);
-		buf[ret] = '\0';
 		tmp = node->save_data;
 		node->save_data = \
 			ft_strcatdup(node->save_data, node->len_data, buf, ret);
@@ -69,7 +68,7 @@ char	*case_need_to_read(t_save_list_node *node)
 	int			i_linebreak;
 	char		*buf;
 
-	buf = (char *)malloc((unsigned long long int)BUFFER_SIZE + 1);
+	buf = (char *)malloc(BUFFER_SIZE);
 	if (!buf)
 		return (NULL);
 	status = read_process(node, buf);
