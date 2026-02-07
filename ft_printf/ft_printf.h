@@ -6,7 +6,7 @@
 /*   By: rynitta <rynitta@student.42tokyo.jp>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/07 10:43:01 by rynitta           #+#    #+#             */
-/*   Updated: 2026/02/07 10:51:21 by rynitta          ###   ########.fr       */
+/*   Updated: 2026/02/07 11:09:48 by rynitta          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@
 # define FLAG_PLUS 16	// (1 << 4)
 # define FLAG_DOT 32	// (1 << 5)
 
-int		ft_printf(const char *format, ...);
+int		ft_printf(const char *format, ...) __attribute__ ((format(printf, 1, 2)));
 
 int		load_conversion_setting(const char *s, va_list *ap, \
 	t_conversion_setting *conversion_setting);
