@@ -6,7 +6,7 @@
 /*   By: rynitta <rynitta@student.42tokyo.jp>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/16 02:58:57 by rynitta           #+#    #+#             */
-/*   Updated: 2025/10/18 09:32:07 by rynitta          ###   ########.fr       */
+/*   Updated: 2026/02/07 10:49:01 by rynitta          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,7 +74,8 @@ void				ft_putnbr_fd(int n, int fd);
 int					ft_putnbr(long long int n);
 int					ft_putnbr_base(int n, char *base);
 int					ft_put_unsigned_nbr(unsigned long long int n);
-int					ft_put_unsigned_nbr_base(unsigned long long int n, char *base);
+int					ft_put_unsigned_nbr_base(unsigned long long int n, \
+	char *base);
 
 t_list				*ft_lstnew(void *content);
 void				ft_lstadd_front(t_list **lst, t_list *new);
@@ -88,7 +89,7 @@ t_list				*ft_lstmap(t_list *lst, void *(*f)(void *), \
 void (*del)(void *));
 
 long long int		ft_abs(long long int n);
-int       			ft_count_digits(long long int n);
+int					ft_count_digits(long long int n);
 int					ft_count_hex_digits(long long int n);
 int					ft_count_unsigned_digits(unsigned long long int n);
 int					ft_count_unsigned_hex_digits(unsigned long long int n);
