@@ -38,7 +38,6 @@
 ### Requirements
 - C compiler (`cc`, `clang`, or `gcc`)
 - `make`
-- Unix-like environment
 
 ### Build
 ```sh
@@ -48,3 +47,25 @@ make
 
 ## Resources
 
+### Documantation
+- attribute for format specifiers
+https://gcc.gnu.org/onlinedocs/gcc/Common-Function-Attributes.html
+```
+ format (archetype, string-index, first-to-check)
+
+    The format attribute specifies that a function takes printf, scanf, strftime or strfmon style arguments that should be type-checked against a format string. For example, the declaration:
+
+    extern int
+    my_printf (void *my_object, const char *my_format, ...)
+          __attribute__ ((format (printf, 2, 3)));
+
+    causes the compiler to check the arguments in calls to my_printf for consistency with the printf style format string argument my_format. 
+```
+
+### AI Usage
+AI was used only for this README.md
+
+
+## Algorithm and Data Structure
+I used static variable for managing a buffer for characters to print.
+It is because we can reduce the number of write system call.
