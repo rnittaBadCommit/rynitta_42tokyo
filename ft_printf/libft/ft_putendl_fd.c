@@ -6,7 +6,7 @@
 /*   By: rynitta <rynitta@student.42tokyo.jp>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/16 02:54:14 by rynitta           #+#    #+#             */
-/*   Updated: 2025/11/14 01:48:56 by rynitta          ###   ########.fr       */
+/*   Updated: 2026/02/07 10:37:05 by rynitta          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,6 @@
 
 void	ft_putendl_fd(char *s, int fd)
 {
-	char	c;
-
 	write(fd, s, ft_strlen(s));
 	write(fd, "\n", 1);
 }
