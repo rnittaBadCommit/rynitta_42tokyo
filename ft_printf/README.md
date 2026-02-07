@@ -67,5 +67,4 @@ AI was used only for this README.md
 
 
 ## Algorithm and Data Structure
-I used static variable for managing a buffer for characters to print.
-It is because we can reduce the number of write system call.
+I used static variable for managing a buffer for characters to print, because we can reduce the number of write system call.
