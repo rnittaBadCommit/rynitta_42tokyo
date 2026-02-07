@@ -6,12 +6,20 @@
 /*   By: rynitta <rynitta@student.42tokyo.jp>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/07 10:46:59 by rynitta           #+#    #+#             */
-/*   Updated: 2026/02/07 10:47:24 by rynitta          ###   ########.fr       */
+/*   Updated: 2026/02/07 10:51:27 by rynitta          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef CASE_CONVERSION_H
 # define CASE_CONVERSION_H
+
+typedef struct s_conversion_setting
+{
+	t_flag	flag;
+	int		width;
+	int		precision;
+	char	conversion_type;
+}	t_conversion_setting;
 
 int	case_s(char *s, t_conversion_setting *conversion_setting);
 int	case_di(long long int n, t_conversion_setting *conversion_setting);

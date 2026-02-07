@@ -6,7 +6,7 @@
 /*   By: rynitta <rynitta@student.42tokyo.jp>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/07 10:43:01 by rynitta           #+#    #+#             */
-/*   Updated: 2026/02/07 10:46:44 by rynitta          ###   ########.fr       */
+/*   Updated: 2026/02/07 10:51:21 by rynitta          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,14 +20,6 @@
 
 # include "./libft/libft.h"
 # include "case_conversion/case_conversion.h"
-
-typedef struct s_conversion_setting
-{
-	t_flag	flag;
-	int		width;
-	int		precision;
-	char	conversion_type;
-}	t_conversion_setting;
 
 # define CONVERSION_CHARACTERS "cspdiuxX%%"
 # define FLAG_CHARACTERS "-0# +"
