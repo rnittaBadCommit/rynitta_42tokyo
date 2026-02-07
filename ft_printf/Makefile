@@ -41,4 +41,4 @@ ${OBJS}: ${LIB}
 ${LIB}:
 	${MAKE} -C ${LIB_DIR}
 	cp ${LIB} ${NAME}
-.PHONY: all bonus clean fclean re .c.o ${LIB}
+.PHONY: all bonus clean fclean re .c.o
